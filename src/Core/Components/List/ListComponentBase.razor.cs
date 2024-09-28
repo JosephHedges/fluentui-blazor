@@ -174,6 +174,12 @@ public abstract partial class ListComponentBase<TOption> : FluentInputBase<strin
     [Parameter]
     public virtual EventCallback<IEnumerable<TOption>?> SelectedOptionsChanged { get; set; }
 
+    /// <summary>
+    /// If true, the user can click the same list item to select it again.
+    /// </summary>
+    [Parameter]
+    public virtual bool AllowReselectionClick { get; set; }
+
     /// <summary />
     public ListComponentBase()
     {
@@ -488,7 +494,7 @@ public abstract partial class ListComponentBase<TOption> : FluentInputBase<strin
         }
         else
         {
-            if (!Equals(item, SelectedOption))
+            if (!Equals(item, SelectedOption) || AllowReselectionClick)
             {
                 var value = GetOptionValue(item);
 
